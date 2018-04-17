@@ -68,7 +68,8 @@ AC_HEADER_DIRENT
 AC_HEADER_STAT
 AC_HEADER_TIME
 AC_CHECK_HEADERS([stdlib.h locale.h unistd.h limits.h fcntl.h string.h \
-                  memory.h sys/param.h sys/resource.h sys/time.h sys/timeb.h])
+                  memory.h sys/param.h sys/resource.h sys/time.h sys/timeb.h \
+                  sys/user.h linux/binfmts.h])
 
 AM_PROG_CC_C_O
 AC_C_CONST
@@ -401,10 +402,9 @@ AC_CACHE_CHECK([if system libc has GNU glob], [make_cv_sys_gnu_glob],
 #include <glob.h>
 #include <fnmatch.h>
 
-#define GLOB_INTERFACE_VERSION 1
 #if !defined _LIBC && defined __GNU_LIBRARY__ && __GNU_LIBRARY__ > 1
 # include <gnu-versions.h>
-# if _GNU_GLOB_INTERFACE_VERSION == GLOB_INTERFACE_VERSION
+# if _GNU_GLOB_INTERFACE_VERSION == 1 || _GNU_GLOB_INTERFACE_VERSION == 2
    gnu glob
 # endif
 #endif],
